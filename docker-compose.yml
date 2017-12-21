@@ -1,0 +1,17 @@
+version: '2'
+services:
+ nrpe-server:
+  restart: unless-stopped
+  build: .
+  volumes:
+   - /media/Backup:/media/Backup:ro
+   - /:/rootfs:ro
+   - /var/run:/var/run:rw
+   - /sys:/sys:ro
+   - /var/lib/docker:/var/lib/docker:ro
+  privileged: true
+  network_mode: host
+  ipc: host
+  pid: host
+  environment:
+   NAGIOS_SERVER: "10.10.0.1"
